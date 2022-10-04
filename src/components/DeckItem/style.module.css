@@ -1,0 +1,21 @@
+
+.deck{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+    background-color: #202020;
+    margin: 5px;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.deck h3{
+    margin-right: 10px;
+    color: #eeeeee;
+}
+
+.deck p{
+    color: #eeeeee;
+}

@@ -1,0 +1,60 @@
+.Modal{
+    width: 300px;
+    height: 150px;
+    border-radius: 10px;
+    background-color: #202020; 
+}
+
+
+.header{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+
+
+    background-color: #101010;
+
+    border-radius: 10px 10px 0px 0px;
+}
+
+.header h2{
+    margin: 10px;
+    color: #ffffff;
+    margin-right: 30px;
+}
+
+.header div{
+    min-width: 30px;
+    min-height: 30px;
+}
+
+.content{
+    width: 100%;
+    height: calc(100% - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input{
+    width: 85%;
+    height: 20px;
+    border-radius: 3px;
+    background-color: #101010;
+    padding: 5px;
+    color: #ffffff;
+    border: 1px solid #303030;
+    outline: none;
+}
+
+.createBtn{
+    width: 100%;
+    height: 40px;
+    border-radius: 0px 0px 10px 10px;
+    background-color: #2192FF;
+    color: #ffffff;
+    font-weight: bold;
+    /* border-style: none; */
+    cursor: pointer;
+}

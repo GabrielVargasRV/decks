@@ -1,0 +1,18 @@
+
+.TimesButton{
+    width: 30px;
+    height: 30px;
+    padding: 0px;
+    background-color: red;
+    border-style: none;
+    margin: 10px;
+}
+
+.TimesButton svg{
+    opacity: 0;
+    transition-duration: 0.5s;
+}
+
+.TimesButton svg:hover{
+    opacity: 1;
+}

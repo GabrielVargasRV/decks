@@ -1,0 +1,59 @@
+
+
+.deckModal{
+    width: 90%;
+    height: 80%;
+    border-radius: 10px;
+    background-color: #202020;
+}
+
+
+.header{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    
+    background-color: #101010;
+
+    border-radius: 10px 10px 0px 0px;
+}
+
+.header h2{
+    margin: 10px;
+    color: white;
+    margin-right: 30px;
+}
+
+.header div{
+    min-width: 30px;
+    min-height: 30px;
+    /* margin: 10px; */
+}
+
+.content{
+    width: 100%;
+    height: calc(100% - 50px);
+}
+/* 
+.closeModalBtn{
+    width: 30px;
+    height: 30px;
+    padding: 0px;
+    background-color: red;
+    border-width: 0px;    
+    margin: 10px;
+}
+
+.closeMdalBtn svg path{
+    background-color: #fff;
+    color: "#fff"
+}
+
+.closeModalBtn svg{
+    opacity: 0
+}
+
+.closeModalBtn svg:hover{
+    opacity: 1;
+} */
