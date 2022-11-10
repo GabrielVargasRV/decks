@@ -33,7 +33,9 @@ class Card{
     }
 }
 
-class DeckServices{
+class DeckAPI{ 
+    static listenersOnChange: {(): void;}[] = [];       
+
     static getById(id: string){
 
 
@@ -45,13 +47,40 @@ class DeckServices{
     }
 
     static getAll(){
-
+        const localDecks = JSON.parse(window.localStorage.getItem('decks')!);
+        return localDecks;
     }
 
     static reviewCard(deck: DeckType, card: CardType, response: string){
 
     }
+
+    static onChange(callback: {(): void;}){
+        this.listenersOnChange.push(callback);
+    }
+
+    static create(name: string){
+        const deck: DeckType = {
+           name: name,
+           id: uuidv4(),
+           createdTimeStamp: Date.now(),
+           cards: [] 
+        }
+
+        if(!window.localStorage.getItem('decks')) window.localStorage.setItem('decks', JSON.stringify([]));
+        const localDecks = JSON.parse(window.localStorage.getItem('decks')!);
+
+        localDecks.push(deck);
+        localDecks.sort();
+        const stringifiedLocalDecks = JSON.stringify(localDecks);
+
+        window.localStorage.setItem('decks', stringifiedLocalDecks);
+    
+        // this.onChange();
+
+        return deck.id;
+    }
 }
 
 
-export default DeckServices;
+export default DeckAPI;

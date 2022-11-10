@@ -9,27 +9,6 @@ export const deckSlice = createSlice({
     name: 'deck',
     initialState: <InitialStateType> {
         decks: [
-            {
-                name: 'English',
-                id: 'id1',
-                createdTimeStamp: Date.now() - 6000,
-                cards:[
-                    {
-                        front: "Test front",
-                        back: "Test back",
-                        nextReminderData: Date.now() + (60 * 2),
-                        createdOn: Date.now() - (60 * 2),
-                        id: "cardid1"
-                    },
-                    {
-                        front: "name",
-                        back: "nombre",
-                        nextReminderData: Date.now(),
-                        createdOn: Date.now() - (60 * 2),
-                        id: "cardid2"
-                    }
-                ]
-            }
         ],
     },
     reducers: {
@@ -52,6 +31,9 @@ export const deckSlice = createSlice({
         getAll: (state, action: PayloadAction): DeckType[] | any => {
             return state.decks;
         },
+        setAll: (state, action: PayloadAction<DeckType[]>): void => {
+           state.decks = action.payload; 
+        },
         updateDeckById: (state, action: PayloadAction<{id: string, deck: DeckType}>) => {
             state.decks.map((deck: DeckType) => {
                 if(deck.id === action.payload.id){
@@ -68,6 +50,7 @@ export const {
     getDeckByName,
     getDeckById,
     updateDeckById,
+    setAll
 } = deckSlice.actions;
 
 

@@ -13,7 +13,6 @@ export const modalSlice = createSlice({
   },
   reducers: {
     setModal: (state, action: PayloadAction<{modal: JSX.Element, isOpen: boolean}>) => {
-      console.log('reducer')
       state.modal = action.payload.modal;
       if(action.payload.isOpen) state.isOpen = action.payload.isOpen;
     },

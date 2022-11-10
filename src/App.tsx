@@ -1,4 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import { useAppDispatch } from './hooks/redux';
+import { setAll } from "./store/reducers/deckSlice";
+import DeckAPI from './services/decks';
 import './App.css'
 import Layout from "./components/Layout";
 
@@ -13,6 +16,13 @@ import {
 
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const decks = DeckAPI.getAll();
+    console.log(decks);
+    dispatch(setAll(decks));
+  }, [])
 
   return (
     <Layout>
