@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
 import styles from "./styles.module.css";
-import {closeModal} from "../../store/reducers/modalSlice";
-import { useAppDispatch } from "../../hooks/redux";
-import { DeckType, CardType } from "../../Types/index";
+import {closeModal} from "../../../store/reducers/modalSlice";
+import { useAppDispatch } from "../../../hooks/redux";
+import { DeckType, CardType } from "../../../Types/index";
 import { useState, useEffect } from "react";
-import TimesButton from "../TimesButton";
+import TimesButton from "../../TimesButton";
 
-import Card from "../Card/index";
+import Card from "../../Card/Card/index";
 
 
 
@@ -15,6 +15,7 @@ interface Props{
 }
 
 const DeckModal = ({deck}: Props) => {
+    console.log('From modal: ', deck);
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState<boolean>(true);
     const [cardsToReview, setCardsToReview] = useState<{cards: CardType[], index: number}>({
@@ -22,6 +23,10 @@ const DeckModal = ({deck}: Props) => {
         index: 0,
     });
 
+    const handleEmptyArrayOfCards = () => {
+        // ******* send massage regarding about 0 cards *******
+        dispatch(closeModal());
+    }
 
     useEffect(() => {
         const tempArray: CardType[] = [];
@@ -39,6 +44,8 @@ const DeckModal = ({deck}: Props) => {
         setLoading(false);
     }, []);
 
+
+    if(deck.cards.length!) handleEmptyArrayOfCards();  
     if(loading) return <div>loading...</div>
 
     return(

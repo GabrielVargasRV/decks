@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import styles from "./styles.module.css";
-import TimesButton from "../TimesButton";
-import { useAppDispatch } from "../../hooks/redux";
-import { closeModal } from "../../store/reducers/modalSlice";
+import TimesButton from "../../TimesButton";
+import { useAppDispatch } from "../../../hooks/redux";
+import { closeModal } from "../../../store/reducers/modalSlice";
 import { useState } from "react";
-import DeckAPI from "../../services/decks/index";
+import DeckAPI from "../../../services/decks/index";
 
 const CreateDeckModal = () => {
     const dispatch = useAppDispatch();

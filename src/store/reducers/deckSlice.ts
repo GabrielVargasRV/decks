@@ -32,7 +32,7 @@ export const deckSlice = createSlice({
             return state.decks;
         },
         setAll: (state, action: PayloadAction<DeckType[]>): void => {
-           state.decks = action.payload; 
+            state.decks = action.payload; 
         },
         updateDeckById: (state, action: PayloadAction<{id: string, deck: DeckType}>) => {
             state.decks.map((deck: DeckType) => {

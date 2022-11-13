@@ -1,0 +1,26 @@
+
+.container{
+    max-width: 600px;
+    padding: 5px;
+    margin: 0 auto;
+}
+
+.bottomSection{
+    max-width: 600px;
+    height: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5px;
+    /* padding: 5px; */
+}
+
+.bottomSection button{
+    background-color: #2192FF;
+    color: #FFFFFF;
+    font-weight: bold;
+    border-width: 0px;
+    border-style: none;
+    border-radius: 3px;
+
+    cursor: pointer;
+}

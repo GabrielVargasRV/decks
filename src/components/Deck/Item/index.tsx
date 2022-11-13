@@ -1,17 +1,15 @@
 import styles from "./style.module.css";
 import { motion } from "framer-motion";
-import {DeckType} from "../../Types/index";
+import {DeckType} from "../../../Types/index";
 
 
 
 interface Props{
     deck: DeckType;
-    handleOnClick: () => {} | null;
+    handleOnClick: () => {} | void |null;
 }
 
 const Deck = ({deck, handleOnClick}: Props) => {
-
-    
 
     return (
         <motion.button onClick={handleOnClick}

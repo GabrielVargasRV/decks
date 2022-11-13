@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CardType } from "../../Types/index";
+import { CardType } from "../../../Types/index";
 import styles from "./styles.module.css";
 
 interface Props{
