@@ -6,6 +6,14 @@ import { closeModal } from "../../../store/reducers/modalSlice";
 import { useState } from "react";
 
 
+
+// ----------------------------------- Font Awesome -------------------------------------//
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faImage} from '@fortawesome/free-regular-svg-icons';
+
+
+// ----------------------------------- Font Awesome -----------------------------------//
+
 const SelectDeckAndType = ({onChange}: {onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void}) => {
     
     return(
@@ -26,17 +34,28 @@ const SelectDeckAndType = ({onChange}: {onChange: (event: React.ChangeEvent<HTML
     )
 }
 
-const TextareaContainer = ({name, onChange}: {name: string, onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void}) => {
+
+// ----------------------------------------------------
+
+const TextareaContainer = ({name, onChange, icons}: {
+    name: string,
+    onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void,
+    icons: JSX.Element | null 
+    }) => {
 
     return(
         <div className={styles.textareaContainer} >
-            <div>
+            <div >
                 <p>{name}</p>
+                {icons}
             </div>
             <textarea name={name.toLocaleLowerCase()} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => onChange(event)} ></textarea>
         </div>
     )
 }
+
+
+// ----------------------------------------------------
 
 const CreateCardModal = () => {
     const dispatch = useAppDispatch();
@@ -66,8 +85,8 @@ const CreateCardModal = () => {
             </div>
             <div className={styles.content} >
                 <SelectDeckAndType onChange={handleOnChange} />
-                <TextareaContainer onChange={handleOnChange} name="Front" />
-                <TextareaContainer onChange={handleOnChange} name="Back" />
+                <TextareaContainer onChange={handleOnChange} name="Front" icons={<FontAwesomeIcon icon={faImage} />} />
+                <TextareaContainer onChange={handleOnChange} name="Back" icons={<FontAwesomeIcon icon={faImage} />} />
             </div>
             <motion.button className={styles.createBtn} onClick={handleOnClick} >Create</motion.button>
         </div>
