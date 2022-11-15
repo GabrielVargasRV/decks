@@ -7,12 +7,10 @@ import { useState } from "react";
 
 
 
-// ----------------------------------- Font Awesome -------------------------------------//
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faImage} from '@fortawesome/free-regular-svg-icons';
+// ----------------------------------- Icons -------------------------------------//
+import { AiFillFileImage } from "react-icons/ai";
 
-
-// ----------------------------------- Font Awesome -----------------------------------//
+// ----------------------------------- Icons -----------------------------------//
 
 const SelectDeckAndType = ({onChange}: {onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void}) => {
     
@@ -57,6 +55,7 @@ const TextareaContainer = ({name, onChange, icons}: {
 
 // ----------------------------------------------------
 
+
 const CreateCardModal = () => {
     const dispatch = useAppDispatch();
     const [state,setState] = useState({
@@ -85,8 +84,8 @@ const CreateCardModal = () => {
             </div>
             <div className={styles.content} >
                 <SelectDeckAndType onChange={handleOnChange} />
-                <TextareaContainer onChange={handleOnChange} name="Front" icons={<FontAwesomeIcon icon={faImage} />} />
-                <TextareaContainer onChange={handleOnChange} name="Back" icons={<FontAwesomeIcon icon={faImage} />} />
+                <TextareaContainer onChange={handleOnChange} name="Front" icons={<AiFillFileImage fill="#fff" className={styles.icon} onClick={() => {}} />} />
+                <TextareaContainer onChange={handleOnChange} name="Back" icons={<AiFillFileImage  fill="#fff" className={styles.icon} onClick={() => {}} />} />
             </div>
             <motion.button className={styles.createBtn} onClick={handleOnClick} >Create</motion.button>
         </div>
