@@ -20,7 +20,6 @@ function App() {
 
   useEffect(() => {
     const decks = DeckAPI.getAll();
-    console.log(decks);
     dispatch(setAll(decks));
   }, [])
 

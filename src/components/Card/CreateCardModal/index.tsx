@@ -6,6 +6,9 @@ import { closeModal } from "../../../store/reducers/modalSlice";
 import React, { useState, useEffect, useRef } from "react";
 
 
+// -----------------------------------
+
+import CustomTextarea from "../../CustomTextarea";
 
 // ----------------------------------- Icons -------------------------------------//
 import { AiFillFileImage } from "react-icons/ai";
@@ -35,17 +38,40 @@ const SelectDeckAndType = ({onChange}: {onChange: (event: React.ChangeEvent<HTML
 
 // ----------------------------------------------------
 
-const TextareaContainer = ({name, onChange, icons}: {name: string, onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void,icons: JSX.Element | null }) => {
+const TextareaContainer = ({name, onChange, icons}: {name: string, onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void, icons: JSX.Element | null}) => {
 
     return(
         <div className={styles.textareaContainer} >
             <div >
                 <p>{name}</p>
-                {icons}
+                <ImageInput onUpload={(sources: string[]) => {}} />
             </div>
             <textarea name={name.toLocaleLowerCase()} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => onChange(event)} ></textarea>
         </div>
     );
+}
+
+const TextContainer = ({name, onChange}: {name: string, onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void}) => {
+    const [text, setText] = useState<string>('');
+
+
+    const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setText(event.target.value);
+        console.log(event.target)
+    }
+
+    return(
+        <div className={styles.textContainer} >
+            <div>
+                <p>{name}</p>
+                {/* icon */}
+            </div>
+            <div className={styles.text} >
+                <input type="text" onChange={handleOnChange} />
+                <div dangerouslySetInnerHTML={{__html: text}} />
+            </div>
+        </div>
+    )
 }
 
 
@@ -120,7 +146,7 @@ const CreateCardModal = () => {
             </div>
             <div className={styles.content} >
                 <SelectDeckAndType onChange={handleOnChange} />
-                <TextareaContainer onChange={handleOnChange} name="Front" icons={<ImageInput onUpload={(sources: string[]) => {}} /> } />
+                <CustomTextarea />
                 <TextareaContainer onChange={handleOnChange} name="Back" icons={<ImageInput onUpload={(sources: string[]) => {}} />} />
             </div>
             <motion.button className={styles.createBtn} onClick={handleOnClick} >Create</motion.button>
