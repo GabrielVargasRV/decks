@@ -5,15 +5,8 @@ import { useAppDispatch } from "../../../hooks/redux";
 import { closeModal } from "../../../store/reducers/modalSlice";
 import React, { useState, useEffect, useRef } from "react";
 
-
-// -----------------------------------
-
-import CustomTextarea from "../../CustomTextarea";
-
-// ----------------------------------- Icons -------------------------------------//
-import { AiFillFileImage } from "react-icons/ai";
-
-// ----------------------------------- Icons -----------------------------------//
+// -------------
+import ContentArea from "../../ContentArea";
 
 const SelectDeckAndType = ({onChange}: {onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void}) => {
     
@@ -36,89 +29,6 @@ const SelectDeckAndType = ({onChange}: {onChange: (event: React.ChangeEvent<HTML
 }
 
 
-// ----------------------------------------------------
-
-const TextareaContainer = ({name, onChange, icons}: {name: string, onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void, icons: JSX.Element | null}) => {
-
-    return(
-        <div className={styles.textareaContainer} >
-            <div >
-                <p>{name}</p>
-                <ImageInput onUpload={(sources: string[]) => {}} />
-            </div>
-            <textarea name={name.toLocaleLowerCase()} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => onChange(event)} ></textarea>
-        </div>
-    );
-}
-
-const TextContainer = ({name, onChange}: {name: string, onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void}) => {
-    const [text, setText] = useState<string>('');
-
-
-    const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setText(event.target.value);
-        console.log(event.target)
-    }
-
-    return(
-        <div className={styles.textContainer} >
-            <div>
-                <p>{name}</p>
-                {/* icon */}
-            </div>
-            <div className={styles.text} >
-                <input type="text" onChange={handleOnChange} />
-                <div dangerouslySetInnerHTML={{__html: text}} />
-            </div>
-        </div>
-    )
-}
-
-
-// ----------------------------------------------------
-
-
-const ImageInput = ({onUpload}: {onUpload: (sources: string[]) => any}) => {
-
-    const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target!.files;
-        if(!files) return;
-
-        const imagesSrc: string[] = [];
-
-        for(let file of files){
-            if (file.type && !file.type.startsWith('image/')) {
-                console.log('File is not an image.', file.type, file);
-                return;
-            }
-    
-            const reader: FileReader = new FileReader();
-            reader.addEventListener('load', (event) => {
-                const result = reader.result as string;
-                if(result !== null) {
-                    imagesSrc.push(result);
-
-                    if(imagesSrc.length === files.length){
-                        onUpload(imagesSrc);
-                    }
-                }
-
-            })
-            reader.readAsDataURL(file);
-        }
-
-
-    }
-
-    return(
-        <label>
-            <input type="file" accept="image/jpeg, image/png, image/jpg" onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleOnChange(event)} />
-            <AiFillFileImage fill="#fff" className={styles.icon} />
-        </label>
-    )
-}
-
-
 const CreateCardModal = () => {
     const dispatch = useAppDispatch();
     const [state,setState] = useState<{type: string, deck: string, front: string, back: string}>({
@@ -127,6 +37,9 @@ const CreateCardModal = () => {
         front: '',
         back: ''
     });
+
+    const frontRef = useRef<HTMLDivElement>(null);
+    const backRef = useRef<HTMLDivElement>(null);
 
     const handleOnChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLSelectElement>) => {
         const key: string = event.target.name;
@@ -146,8 +59,8 @@ const CreateCardModal = () => {
             </div>
             <div className={styles.content} >
                 <SelectDeckAndType onChange={handleOnChange} />
-                <CustomTextarea />
-                <TextareaContainer onChange={handleOnChange} name="Back" icons={<ImageInput onUpload={(sources: string[]) => {}} />} />
+                <ContentArea name="Front" ref={frontRef} />
+                <ContentArea name="Back" ref={backRef} />
             </div>
             <motion.button className={styles.createBtn} onClick={handleOnClick} >Create</motion.button>
         </div>
