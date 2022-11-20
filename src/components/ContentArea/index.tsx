@@ -1,10 +1,12 @@
 import styles from "./styles.module.css";
 import React, { useState, forwardRef } from "react";
 import ImageInput from "../ImageInput";
-import { AiOutlineCaretDown } from "react-icons/ai";
+import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 
 type Props = {
-    name: string;
+    name: string,
+    reduceToggle: (name: string) => any,
+    isReduced: boolean,
 }
 
 const ContentArea = forwardRef<HTMLDivElement, Props>((props,ref) => {
@@ -23,7 +25,10 @@ const ContentArea = forwardRef<HTMLDivElement, Props>((props,ref) => {
             <div className={styles.header}>
                 <p>{props.name}</p>
                 <div>
-                    <AiOutlineCaretDown fill="#fff" className={styles.icon} />
+                    {props.isReduced ? 
+                        <AiOutlineCaretUp onClick={() => props.reduceToggle(props.name)} fill="#fff" className={styles.icon} /> : 
+                        <AiOutlineCaretDown onClick={() => props.reduceToggle(props.name)} fill="#fff" className={styles.icon} />
+                    }
                     <ImageInput onUpload={(sources) => handleImageUpload(sources)} />
                 </div>
             </div>

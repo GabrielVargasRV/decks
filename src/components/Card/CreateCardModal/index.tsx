@@ -31,13 +31,14 @@ const SelectDeckAndType = ({onChange}: {onChange: (event: React.ChangeEvent<HTML
 
 const CreateCardModal = () => {
     const dispatch = useAppDispatch();
-    const [state,setState] = useState<{type: string, deck: string, front: string, back: string}>({
+    const [state,setState] = useState<{type: string, deck: string}>({
         type: '',
         deck: '',
-        front: '',
-        back: ''
     });
 
+    const [isReduced, setIsReduced] = useState<string | null>(null);
+
+    
     const frontRef = useRef<HTMLDivElement>(null);
     const backRef = useRef<HTMLDivElement>(null);
 
@@ -50,6 +51,10 @@ const CreateCardModal = () => {
         });
     }
 
+    const reduceToggle = (name: string) => {
+        isReduced === name ? setIsReduced(null) : setIsReduced(name);
+    }
+
     const handleOnClick = () => {}
 
     return (
@@ -57,10 +62,10 @@ const CreateCardModal = () => {
             <div className={styles.header} >
                 <TimesButton handleOnClick={() => dispatch(closeModal())} />
             </div>
-            <div className={styles.content} >
+            <div className={`${styles.content} ${isReduced === 'Front' && styles.frontReduced} ${isReduced === 'Back' && styles.backReduced}`} >
                 <SelectDeckAndType onChange={handleOnChange} />
-                <ContentArea name="Front" ref={frontRef} />
-                <ContentArea name="Back" ref={backRef} />
+                <ContentArea name="Front" reduceToggle={reduceToggle} isReduced={isReduced === 'Front'} ref={frontRef} />
+                <ContentArea name="Back" reduceToggle={reduceToggle} isReduced={isReduced === 'Back'} ref={backRef} />
             </div>
             <motion.button className={styles.createBtn} onClick={handleOnClick} >Create</motion.button>
         </div>
